@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Groffline</title>
+  <style type="text/css" media="screen">
+      #editor { 
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 50%;
+      }
+      #viewer-div {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 50%;
+          width: 50%;
+          height: 100%;
+      }
+      #controls-div {
+          flex: 1;
+          display: flex;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+      }
+      #compile-button {
+          flex: 3;
+          height: 100%;
+      }
+      #macros-selector {
+          flex: 2;
+          height: 100%;
+      }
+      #viewer {
+          flex: 9;
+          width: 100%;
+      }
+  </style>
+</head>
+
+<body>
+  <!-- Content -->
+  <div id="editor">.TL
+Title
+.LP
+Hello
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div id="viewer-div">
+    <div id="controls-div">
+      <button id="compile-button" type="button">Compile</button>
+      <label for="macros-selector">Macro set:</label>
+      <select name="macros-selector" id="macros-selector">
+        <option value="ms" selected>MS</option>
+        <option value="mm">MM</option>
+        <option value="me">ME</option>
+        <option value="mom">MOM</option>
+      </select>
+    </div>
+    <embed id="viewer" type="application/pdf" />
+  </div>
+  <script src="pdfUI.js"></script>
+</body>
+</html>
