@@ -1,18 +1,11 @@
 package org.groffline.demo;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,8 +31,15 @@ public class DemoApplication {
   groffline(@RequestParam(value = "macro", defaultValue = "ms") String macro,
             @RequestParam(value = "input", defaultValue = ".TL\nNo input") String input) throws IOException {
 
+    Groff.Macro useMacro = null;
+    if(macro.equals(Groff.Macro.ME.toString())) {useMacro = Groff.Macro.ME;}
+    else if(macro.equals(Groff.Macro.MM.toString())) {useMacro = Groff.Macro.MM;}
+    else if(macro.equals(Groff.Macro.MOM.toString())) {useMacro = Groff.Macro.MOM;}
+    else {useMacro = Groff.Macro.MS;}
+
+
     //String decodedInput = URLDecoder.decode(input, StandardCharsets.UTF_8);
-    String filename = Groff.render(input, Groff.Macro.MS);
+    String filename = Groff.render(input, useMacro);
     Path path = Paths.get(filename);
     byte[] contents = Files.readAllBytes(path);
     HttpHeaders headers = new HttpHeaders();
