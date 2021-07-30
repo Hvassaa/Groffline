@@ -2,10 +2,13 @@
 let aceEditor = ace.edit("editor");
 aceEditor.setTheme("ace/theme/monokai");
 
-let cookie = document.cookie
+let cookie = document.cookie;
 if (cookie !== "") {
   let savedInput = decodeURIComponent(cookie);
   aceEditor.setValue(savedInput);
+  aceEditor.clearSelection();
+} else {
+  aceEditor.setValue(".TL\nTitle\n.LP\nA Paragraph.");
   aceEditor.clearSelection();
 }
 
@@ -24,6 +27,7 @@ let compileFun = function() {
   let selectedMacro = macrosSelector.value;
 
   let queryString = '/groffline?macro=' + selectedMacro + '&input=' + encodedInput;
+  queryString = window.location.href + queryString;
 
   console.log("Sending query: " + queryString);
   
