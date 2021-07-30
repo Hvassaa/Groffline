@@ -29,7 +29,7 @@ The api was built using the [Spring (boot) framework](https://spring.io/).
 
 ## Frontend
 The frontend is some HTML and javascript glued together. It uses the great 
-[Ace editor](https://ace.c9.io/) for editing and a single `embed` tag to
+[Ace editor](https://ace.c9.io/) for editing and a single `object` tag to
 show PDFs. It is served by the Apache Tomcat, through the Spring framework.
 
 ## Running
