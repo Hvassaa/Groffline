@@ -12,12 +12,17 @@ if (cookie !== "") {
   aceEditor.clearSelection();
 }
 
+const windowLocation = window.location.href;
+
 // get macro set
 let macrosSelector = document.getElementById("macros-selector");
 
 // fetching pdf blobs and updating the view
 let compileButton = document.getElementById("compile-button");
-let embed = document.getElementById("viewer");
+let pdfViewer = document.getElementById("viewer");
+// SET THIS WHEN UPDATING PDFJS
+const pdfjsVersion = "2.9.359";
+const viewerAdress = windowLocation + "/pdfjs-" + pdfjsVersion + "-dist/web/viewer.html?file=";
 
 let compileFun = function() {
   let input = aceEditor.getValue();
@@ -27,7 +32,7 @@ let compileFun = function() {
   let selectedMacro = macrosSelector.value;
 
   let queryString = '/groffline?macro=' + selectedMacro + '&input=' + encodedInput;
-  queryString = window.location.href + queryString;
+  queryString = windowLocation + queryString;
 
   console.log("Sending query: " + queryString);
   
@@ -36,8 +41,8 @@ let compileFun = function() {
   .then(response => response.blob())
   .then(blob => {
     let newBlob = new Blob([blob], {type: "application/pdf"})
-    let url = URL.createObjectURL(newBlob);
-    embed.src = url;
+    let pdfUrl = URL.createObjectURL(newBlob);
+    pdfViewer.src = viewerAdress + pdfUrl;
   });
 };
 
