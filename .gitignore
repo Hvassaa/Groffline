@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### do not include pdf.js dist ###
+src/main/resources/static/pdfjs/
