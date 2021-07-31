@@ -25,7 +25,7 @@ public class Groff {
         }
     }
 
-    public static String render(String input, Groff.Macro macro) {
+    public static byte[] render(String input, Groff.Macro macro) {
         try {
             final String uuid = UUID.randomUUID().toString().replace("-","");
             String pathString = "/tmp/"+uuid+"."+macro;
@@ -37,14 +37,10 @@ public class Groff {
             p.waitFor();
             InputStream stream = p.getInputStream();
             byte[] outputBytes = stream.readAllBytes();
+            System.out.println("START" + (new String(outputBytes)) + "END");
             stream.close();
             p.destroy();
-
-            String outFilename = "/tmp/" + uuid + ".pdf";
-            Path outPath = Paths.get(outFilename);
-            Files.write(outPath, outputBytes);
-
-            return outFilename;
+            return outputBytes;
         } catch (Exception e) {
             // TODO better error handling
             return null;
