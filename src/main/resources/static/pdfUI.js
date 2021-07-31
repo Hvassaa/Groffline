@@ -20,6 +20,7 @@ let macrosSelector = document.getElementById("macros-selector");
 // fetching pdf blobs and updating the view
 let compileButton = document.getElementById("compile-button");
 let pdfViewer = document.getElementById("viewer");
+const viewerAdress = windowLocation + "/pdfjs/web/viewer.html?file=";
 
 let compileFun = function() {
   let input = aceEditor.getValue();
@@ -39,7 +40,7 @@ let compileFun = function() {
   .then(blob => {
     let newBlob = new Blob([blob], {type: "application/pdf"})
     let pdfUrl = URL.createObjectURL(newBlob);
-    pdfViewer.data = pdfUrl;
+    pdfViewer.src = viewerAdress + pdfUrl;
   });
 };
 
