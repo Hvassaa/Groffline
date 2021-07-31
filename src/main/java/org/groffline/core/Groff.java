@@ -1,4 +1,5 @@
 package org.groffline.core;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -37,9 +38,10 @@ public class Groff {
             p.waitFor();
             InputStream stream = p.getInputStream();
             byte[] outputBytes = stream.readAllBytes();
-            System.out.println("START" + (new String(outputBytes)) + "END");
             stream.close();
             p.destroy();
+            File file = new File(pathString);
+            file.delete();
             return outputBytes;
         } catch (Exception e) {
             // TODO better error handling
