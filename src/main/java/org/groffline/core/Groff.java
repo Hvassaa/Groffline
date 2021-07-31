@@ -1,6 +1,4 @@
-package org.groffline.demo;
-import java.io.IOError;
-import java.io.IOException;
+package org.groffline.core;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
